@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal Advocacy & Campaign Effectiveness Survey</title>
+    <title>Animal Advocacy and Campaign Effectiveness Survey</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -602,6 +602,12 @@
             font-weight: 300;
         }
         
+        .hero-image .photo-credit a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
         @media (max-width: 600px) {
             body {
                 padding: 16px 12px;
@@ -801,6 +807,25 @@
                         <label class="option"><input type="radio" name="awarenessAlternatives" value="no"><span>No, this is news to me</span></label>
                     </div>
                 </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        When you think about issues you care about, where does animal welfare rank compared to other causes? <span class="required">*</span>
+                        <span class="question-sublabel">Select the top 3 issues that matter most to you.</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="healthcare"><span>Healthcare and access to medicine</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="climate-environment"><span>Climate change and the environment</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="animal-welfare"><span>Animal welfare and animal rights</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="housing"><span>Housing affordability</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="poverty-inequality"><span>Poverty and economic inequality</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="human-rights"><span>Human rights and social justice</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="education"><span>Education</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="public-safety"><span>Public safety and crime</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="indigenous-rights"><span>Indigenous rights and reconciliation</span></label>
+                        <label class="option"><input type="checkbox" name="competingPriorities" value="wildlife-biodiversity"><span>Wildlife conservation and biodiversity</span></label>
+                    </div>
+                </div>
             </div>
             
             <!-- ============ SECTION 3: AWARENESS OF APPC & MACAQUE CAMPAIGN ============ -->
@@ -808,6 +833,23 @@
                 <div class="section-header">
                     <h2>3 &middot; Awareness of the Macaque Campaign</h2>
                     <div class="description">Understanding how much you know about a specific ongoing campaign.</div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Based on what you know right now, how concerned are you about the use of animals in laboratory research in Canada? <span class="required">*</span>
+                    </label>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="initialConcernLevel" value="1" required><span class="likert-label">Not concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="initialConcernLevel" value="2"><span class="likert-label">Slightly concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="initialConcernLevel" value="3"><span class="likert-label">Moderately concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="initialConcernLevel" value="4"><span class="likert-label">Very concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="initialConcernLevel" value="5"><span class="likert-label">Extremely concerned</span></label>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <strong>Please read the following background carefully before continuing.</strong>
                 </div>
                 
                 <div class="context-box">
@@ -931,6 +973,71 @@
                         <label class="option"><input type="checkbox" name="campaignBlockers" value="dont-agree"><span>I don't personally agree with the goals of such campaigns</span></label>
                         <label class="option"><input type="checkbox" name="campaignBlockers" value="privacy-concern"><span>I'm concerned about sharing my personal information</span></label>
                         <label class="option"><input type="checkbox" name="campaignBlockers" value="none"><span>None of the above — nothing stops me from engaging</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Different campaigns frame the macaque issue in different ways. Which of the following arguments would MOST compel you to take action? <span class="required">*</span>
+                        <span class="question-sublabel">Select one.</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="messageFraming" value="animal-cruelty" required><span><strong>Animal cruelty:</strong> These intelligent, social animals are confined in tiny cages, subjected to painful experiments, and killed — it's morally wrong</span></label>
+                        <label class="option"><input type="radio" name="messageFraming" value="endangered-species"><span><strong>Endangered species:</strong> Long-tailed macaques are classified as endangered, and Canada's imports are contributing to their decline toward extinction</span></label>
+                        <label class="option"><input type="radio" name="messageFraming" value="illegal-trafficking"><span><strong>Illegal trafficking:</strong> Wild monkeys are being laundered through fake breeding farms with falsified permits — Canada is participating in a criminal supply chain</span></label>
+                        <label class="option"><input type="radio" name="messageFraming" value="public-health"><span><strong>Public health risk:</strong> These primates carry zoonotic diseases like Herpes B, and Canada has stopped testing imported monkeys — putting lab workers and communities at risk</span></label>
+                        <label class="option"><input type="radio" name="messageFraming" value="science-outdated"><span><strong>Outdated science:</strong> Modern alternatives like AI modelling and organ-on-chip systems are more effective and humane — primate research is scientifically unnecessary</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        How much does the type of organization leading a campaign affect your trust in it? <span class="required">*</span>
+                        <span class="question-sublabel">Rate your level of trust for each type of messenger.</span>
+                    </label>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">A registered political party (e.g., Animal Protection Party of Canada)</div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="trustPoliticalParty" value="1" required><span class="likert-label">No trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustPoliticalParty" value="2"><span class="likert-label">Low trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustPoliticalParty" value="3"><span class="likert-label">Moderate trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustPoliticalParty" value="4"><span class="likert-label">High trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustPoliticalParty" value="5"><span class="likert-label">Very high trust</span></label>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">A non-profit animal welfare organization (e.g., World Animal Protection, Humane Society)</div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="trustNGO" value="1" required><span class="likert-label">No trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustNGO" value="2"><span class="likert-label">Low trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustNGO" value="3"><span class="likert-label">Moderate trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustNGO" value="4"><span class="likert-label">High trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustNGO" value="5"><span class="likert-label">Very high trust</span></label>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Scientists or academic researchers</div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="trustScientists" value="1" required><span class="likert-label">No trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustScientists" value="2"><span class="likert-label">Low trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustScientists" value="3"><span class="likert-label">Moderate trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustScientists" value="4"><span class="likert-label">High trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustScientists" value="5"><span class="likert-label">Very high trust</span></label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Journalists and investigative media</div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="trustMedia" value="1" required><span class="likert-label">No trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustMedia" value="2"><span class="likert-label">Low trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustMedia" value="3"><span class="likert-label">Moderate trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustMedia" value="4"><span class="likert-label">High trust</span></label>
+                            <label class="likert-option"><input type="radio" name="trustMedia" value="5"><span class="likert-label">Very high trust</span></label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1197,7 +1304,14 @@
         document.getElementById('surveyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Validate checkbox groups
+            // Validate competing priorities (exactly 3)
+            const priorities = document.querySelectorAll('input[name="competingPriorities"]:checked');
+            if (priorities.length === 0 || priorities.length > 3) {
+                showError('Please select exactly 3 issues that matter most to you (Section 2).');
+                return;
+            }
+            
+            // Validate campaign motivators
             const motivators = document.querySelectorAll('input[name="campaignMotivators"]:checked');
             if (motivators.length === 0) {
                 showError('Please select at least one factor that would motivate you to get involved (Section 4).');
@@ -1253,7 +1367,7 @@
             const formData = {};
             
             const checkboxGroups = [
-                'campaignMotivators', 'campaignBlockers', 'preferredChannels'
+                'competingPriorities', 'campaignMotivators', 'campaignBlockers', 'preferredChannels'
             ];
             
             checkboxGroups.forEach(group => {

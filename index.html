@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Advocacy & Campaign Effectiveness Survey</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --forest: #1a3a2a;
+            --forest-light: #2d5a3f;
+            --leaf: #4a8c5c;
+            --leaf-muted: #6fa87e;
+            --sand: #f4efe6;
+            --sand-dark: #e8e0d2;
+            --bark: #5c4a3a;
+            --bark-light: #8a7260;
+            --ember: #c4533a;
+            --ember-light: #e87a5a;
+            --cream: #faf8f4;
+            --text-primary: #2a2a28;
+            --text-secondary: #5a5a56;
+            --text-muted: #8a8a84;
+            --border: #d8d2c6;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--sand);
+            padding: 40px 20px;
+            min-height: 100vh;
+            color: var(--text-primary);
+            background-image: 
+                radial-gradient(circle at 20% 10%, rgba(74,140,92,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(196,83,58,0.04) 0%, transparent 50%);
+        }
+        
+        .form-container {
+            max-width: 780px;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 12px 40px rgba(0,0,0,0.06);
+        }
+        
+        .form-header {
+            background: var(--forest);
+            color: white;
+            padding: 48px 36px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 40%, rgba(74,140,92,0.15));
+            pointer-events: none;
+        }
+        
+        .form-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--leaf), var(--ember-light), var(--leaf));
+        }
+        
+        .header-eyebrow {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--leaf-muted);
+            margin-bottom: 14px;
+        }
+        
+        .form-header h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+        
+        .form-header p {
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.82;
+            line-height: 1.7;
+            max-width: 620px;
+        }
+        
+        .est-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 18px;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .est-time svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0.7;
+        }
+        
+        .section {
+            padding: 32px 36px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        
+        .section-header {
+            margin: -32px -36px 28px -36px;
+            padding: 20px 36px;
+            background: var(--sand);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-header h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--forest);
+            margin-bottom: 4px;
+        }
+        
+        .section-header .description {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+        
+        .question {
+            margin-bottom: 32px;
+        }
+        
+        .question:last-child {
+            margin-bottom: 0;
+        }
+        
+        .question-label {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            display: block;
+            line-height: 1.5;
+        }
+        
+        .question-sublabel {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-top: 4px;
+            display: block;
+        }
+        
+        .required {
+            color: var(--ember);
+            margin-left: 3px;
+            font-weight: 600;
+        }
+        
+        .question-options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-left: 2px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 6px;
+            transition: background 0.15s ease;
+            line-height: 1.45;
+        }
+        
+        .option:hover {
+            background: var(--sand);
+        }
+        
+        .option span {
+            padding-top: 1px;
+        }
+        
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--forest);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .text-input, .text-area {
+            width: 100%;
+            max-width: 500px;
+            border: none;
+            border-bottom: 1.5px solid var(--border);
+            padding: 10px 0;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+            background: transparent;
+            transition: border-color 0.2s ease;
+        }
+        
+        .text-input:focus, .text-area:focus {
+            outline: none;
+            border-bottom-color: var(--forest);
+        }
+        
+        .text-input::placeholder, .text-area::placeholder {
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+        
+        .text-area {
+            max-width: 100%;
+            min-height: 80px;
+            resize: vertical;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        
+        .text-area:focus {
+            border-color: var(--forest);
+        }
+        
+        .short-answer {
+            max-width: 280px;
+        }
+        
+        .dropdown {
+            width: 100%;
+            max-width: 340px;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+        
+        .dropdown:focus {
+            outline: none;
+            border-color: var(--forest);
+        }
+        
+        /* Likert scale styles */
+        .likert-scale {
+            display: flex;
+            gap: 0;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .likert-option {
+            flex: 1 1 0;
+            min-width: 0;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .likert-option input[type="radio"] {
+            display: none;
+        }
+        
+        .likert-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
+            padding: 10px 8px;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            border: 1.5px solid var(--border);
+            margin-left: -1.5px;
+            transition: all 0.15s ease;
+            line-height: 1.35;
+        }
+        
+        .likert-option:first-child .likert-label {
+            border-radius: 6px 0 0 6px;
+            margin-left: 0;
+        }
+        
+        .likert-option:last-child .likert-label {
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .likert-option input[type="radio"]:checked + .likert-label {
+            background: var(--forest);
+            color: white;
+            border-color: var(--forest);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .likert-option:hover .likert-label {
+            background: var(--sand);
+        }
+        
+        .likert-option input[type="radio"]:checked + .likert-label:hover {
+            background: var(--forest-light);
+        }
+        
+        .info-box {
+            background: rgba(74,140,92,0.06);
+            border-left: 3px solid var(--leaf);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--forest);
+            border-radius: 0 6px 6px 0;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        
+        .info-box strong {
+            font-weight: 600;
+        }
+        
+        .info-box a {
+            color: var(--forest);
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .context-box {
+            background: var(--sand);
+            border: 1.5px solid var(--border);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+        
+        .context-box strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .success-box {
+            background: rgba(74,140,92,0.06);
+            border-left: 3px solid var(--leaf);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--forest);
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .error-box {
+            background: rgba(196,83,58,0.06);
+            border-left: 3px solid var(--ember);
+            padding: 14px 20px;
+            margin: 0 36px 20px;
+            font-size: 14px;
+            color: var(--ember);
+            border-radius: 0 6px 6px 0;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .prolific-info {
+            background: rgba(138,114,96,0.08);
+            border-left: 3px solid var(--bark-light);
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--bark);
+            border-radius: 0 6px 6px 0;
+            font-weight: 400;
+        }
+        
+        .readonly-field {
+            background: var(--sand);
+            color: var(--text-muted);
+        }
+        
+        /* Petition CTA */
+        .petition-cta {
+            background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
+            color: white;
+            padding: 32px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .petition-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04), transparent 60%);
+            pointer-events: none;
+        }
+        
+        .petition-cta h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+        
+        .petition-cta p {
+            font-size: 14px;
+            font-weight: 300;
+            opacity: 0.85;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            max-width: 580px;
+        }
+        
+        .petition-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--forest);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            letter-spacing: 0.2px;
+        }
+        
+        .petition-link:hover {
+            background: var(--sand);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .petition-link svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .submit-section {
+            padding: 28px 36px;
+            text-align: center;
+            background: var(--sand);
+        }
+        
+        .submit-button {
+            background: var(--forest);
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        
+        .submit-button:hover:not(:disabled) {
+            background: var(--forest-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26,58,42,0.25);
+        }
+        
+        .submit-button:disabled {
+            background: var(--border);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .spinner {
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .consent-box {
+            padding: 24px 36px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .consent-box label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.55;
+        }
+        
+        .footer-note {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+        
+        /* Progress indicator */
+        .progress-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 3px;
+            background: var(--border);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--leaf), var(--ember-light));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 16px 12px;
+            }
+            .form-header {
+                padding: 32px 24px;
+            }
+            .form-header h1 {
+                font-size: 24px;
+            }
+            .section {
+                padding: 24px;
+            }
+            .section-header {
+                margin: -24px -24px 24px -24px;
+                padding: 16px 24px;
+            }
+            .likert-scale {
+                flex-direction: column;
+            }
+            .likert-option {
+                flex: none;
+            }
+            .likert-option:first-child .likert-label {
+                border-radius: 6px 6px 0 0;
+            }
+            .likert-option:last-child .likert-label {
+                border-radius: 0 0 6px 6px;
+            }
+            .likert-option .likert-label {
+                margin-left: 0;
+                margin-top: -1.5px;
+                min-height: 44px;
+            }
+            .petition-cta {
+                padding: 28px 24px;
+            }
+            .error-box {
+                margin: 0 24px 20px;
+            }
+            .consent-box, .submit-section {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        
+        <div class="form-header">
+            <div class="header-eyebrow">Research Survey · Prolific</div>
+            <h1>Animal Advocacy &amp; Campaign Effectiveness</h1>
+            <p>This survey explores public awareness and attitudes toward animal protection campaigns in Canada — specifically efforts to protect endangered long-tailed macaques from laboratory research. Your honest responses will help us understand how to make advocacy more effective. All responses are confidential.</p>
+
+        </div>
+        
+        <form id="surveyForm">
+            
+            <!-- ============ SECTION 1: ABOUT YOU ============ -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>1 &middot; About You</h2>
+                    <div class="description">Basic demographic information to help us understand our respondent pool.</div>
+                </div>
+                
+                <div class="prolific-info" id="prolificInfo" style="display: none;">
+                    &#10003; Prolific participant detected. Your ID has been automatically captured.
+                </div>
+                
+                <div class="question">
+                    <label class="question-label" for="prolificId">
+                        Prolific ID <span class="required">*</span>
+                    </label>
+                    <input type="text" id="prolificId" name="prolificId" class="text-input short-answer readonly-field" placeholder="Auto-filled from URL" readonly required>
+                    <input type="hidden" id="studyId" name="studyId">
+                    <input type="hidden" id="sessionId" name="sessionId">
+                </div>
+                
+                <div class="question">
+                    <label class="question-label" for="age">
+                        What is your age? <span class="required">*</span>
+                    </label>
+                    <input type="number" id="age" name="age" class="text-input short-answer" placeholder="Your answer" min="18" max="120" required>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        What is your gender? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="gender" value="male" required><span>Male</span></label>
+                        <label class="option"><input type="radio" name="gender" value="female"><span>Female</span></label>
+                        <label class="option"><input type="radio" name="gender" value="non-binary"><span>Non-binary</span></label>
+                        <label class="option"><input type="radio" name="gender" value="prefer-not-to-say"><span>Prefer not to say</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label" for="province">
+                        Where in Canada do you live? <span class="required">*</span>
+                    </label>
+                    <select id="province" name="province" class="dropdown" required>
+                        <option value="">Choose</option>
+                        <option value="AB">Alberta</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NU">Nunavut</option>
+                        <option value="ON">Ontario</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="QC">Quebec</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="YT">Yukon</option>
+                        <option value="outside-canada">I live outside of Canada</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label" for="education">
+                        Highest level of education <span class="required">*</span>
+                    </label>
+                    <select id="education" name="education" class="dropdown" required>
+                        <option value="">Choose</option>
+                        <option value="hs-or-less">High school or less</option>
+                        <option value="some-college">Some college / vocational</option>
+                        <option value="bachelor">Bachelor's degree</option>
+                        <option value="graduate">Master's degree</option>
+                        <option value="phd">Doctoral degree (PhD)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- ============ SECTION 2: GENERAL ATTITUDES TO ANIMAL WELFARE ============ -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>2 &middot; Your Views on Animal Welfare</h2>
+                    <div class="description">General attitudes toward animal rights and protection campaigns.</div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        How important is animal welfare to you personally? <span class="required">*</span>
+                    </label>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="animalWelfareImportance" value="1" required><span class="likert-label">Not at all important</span></label>
+                        <label class="likert-option"><input type="radio" name="animalWelfareImportance" value="2"><span class="likert-label">Slightly important</span></label>
+                        <label class="likert-option"><input type="radio" name="animalWelfareImportance" value="3"><span class="likert-label">Moderately important</span></label>
+                        <label class="likert-option"><input type="radio" name="animalWelfareImportance" value="4"><span class="likert-label">Very important</span></label>
+                        <label class="likert-option"><input type="radio" name="animalWelfareImportance" value="5"><span class="likert-label">Extremely important</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Have you ever actively supported an animal protection campaign? <span class="required">*</span>
+                        <span class="question-sublabel">(e.g., signed a petition, donated, shared on social media, attended a rally)</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="pastSupport" value="yes-multiple" required><span>Yes, I have supported several campaigns</span></label>
+                        <label class="option"><input type="radio" name="pastSupport" value="yes-once"><span>Yes, once or twice</span></label>
+                        <label class="option"><input type="radio" name="pastSupport" value="no-but-interested"><span>No, but I would consider it</span></label>
+                        <label class="option"><input type="radio" name="pastSupport" value="no"><span>No, and I'm not interested</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        How much do you agree with the following: "Using animals in laboratory research is justified when it may benefit human health." <span class="required">*</span>
+                    </label>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="animalResearchView" value="strongly-agree" required><span class="likert-label">Strongly agree</span></label>
+                        <label class="likert-option"><input type="radio" name="animalResearchView" value="agree"><span class="likert-label">Somewhat agree</span></label>
+                        <label class="likert-option"><input type="radio" name="animalResearchView" value="neutral"><span class="likert-label">Neutral / Unsure</span></label>
+                        <label class="likert-option"><input type="radio" name="animalResearchView" value="disagree"><span class="likert-label">Somewhat disagree</span></label>
+                        <label class="likert-option"><input type="radio" name="animalResearchView" value="strongly-disagree"><span class="likert-label">Strongly disagree</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Are you aware that alternatives to animal testing exist (e.g., AI-driven modelling, organ-on-chip systems, human-biology-based methods)? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="awarenessAlternatives" value="yes-familiar" required><span>Yes, I'm quite familiar with these alternatives</span></label>
+                        <label class="option"><input type="radio" name="awarenessAlternatives" value="heard-of"><span>I've heard of them but don't know the details</span></label>
+                        <label class="option"><input type="radio" name="awarenessAlternatives" value="no"><span>No, this is news to me</span></label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ============ SECTION 3: AWARENESS OF APPC & MACAQUE CAMPAIGN ============ -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>3 &middot; Awareness of the Macaque Campaign</h2>
+                    <div class="description">Understanding how much you know about a specific ongoing campaign.</div>
+                </div>
+                
+                <div class="context-box">
+                    <strong>Background:</strong> The <strong>Animal Protection Party of Canada (APPC)</strong> is campaigning to stop Canada's import of endangered long-tailed macaques from Cambodia for laboratory research. Since 2023, Canada has imported over 10,000 of these endangered primates. In 2022, U.S. authorities indicted Cambodian officials for an illegal smuggling scheme — wild-caught monkeys falsely labelled as captive-bred. The U.S. suspended all imports; Canada increased them. The APPC has launched federal petitions, media campaigns, and advocacy efforts to halt this practice.
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Before today, had you heard of the Animal Protection Party of Canada (APPC)? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="awareAPPC" value="yes-know-well" required><span>Yes, I know them well and have followed their work</span></label>
+                        <label class="option"><input type="radio" name="awareAPPC" value="yes-heard-name"><span>I've heard the name but don't know much about them</span></label>
+                        <label class="option"><input type="radio" name="awareAPPC" value="no"><span>No, I've never heard of them</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Before reading the background above, were you aware that Canada imports endangered macaques for laboratory research? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="awareMacaqueIssue" value="yes-detailed" required><span>Yes, I was aware and knew some details</span></label>
+                        <label class="option"><input type="radio" name="awareMacaqueIssue" value="yes-vague"><span>I'd heard something about it but wasn't sure of the specifics</span></label>
+                        <label class="option"><input type="radio" name="awareMacaqueIssue" value="no"><span>No, I had no idea</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        If you were previously aware, how did you first learn about the macaque issue? <span class="question-sublabel">(Skip if you selected "No" above)</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="macaqueSource" value="social-media"><span>Social media (Facebook, Instagram, X/Twitter, TikTok, etc.)</span></label>
+                        <label class="option"><input type="radio" name="macaqueSource" value="news"><span>News article or TV report</span></label>
+                        <label class="option"><input type="radio" name="macaqueSource" value="animal-org"><span>An animal protection organization's website or email</span></label>
+                        <label class="option"><input type="radio" name="macaqueSource" value="word-of-mouth"><span>Word of mouth / friends or family</span></label>
+                        <label class="option"><input type="radio" name="macaqueSource" value="reddit-forum"><span>Reddit or online forums</span></label>
+                        <label class="option"><input type="radio" name="macaqueSource" value="other"><span>Other</span></label>
+                        <label class="option"><input type="radio" name="macaqueSource" value="na"><span>N/A — I was not previously aware</span></label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        Now that you've read the background, how concerned are you about the import of endangered macaques for research in Canada? <span class="required">*</span>
+                    </label>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="macaqueConcernLevel" value="1" required><span class="likert-label">Not concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="macaqueConcernLevel" value="2"><span class="likert-label">Slightly concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="macaqueConcernLevel" value="3"><span class="likert-label">Moderately concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="macaqueConcernLevel" value="4"><span class="likert-label">Very concerned</span></label>
+                        <label class="likert-option"><input type="radio" name="macaqueConcernLevel" value="5"><span class="likert-label">Extremely concerned</span></label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ============ SECTION 4: ATTITUDES TO CAMPAIGN NECESSITY & EFFICIENCY ============ -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>4 &middot; Campaign Necessity &amp; Effectiveness</h2>
+                    <div class="description">Your beliefs about whether campaigns like this one matter and actually work.</div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Do you believe campaigns like the APPC macaque petition are necessary? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="campaignNecessary" value="absolutely" required><span>Absolutely — without public pressure, nothing changes</span></label>
+                        <label class="option"><input type="radio" name="campaignNecessary" value="probably"><span>Probably — they help, but aren't the only solution</span></label>
+                        <label class="option"><input type="radio" name="campaignNecessary" value="unsure"><span>Unsure — I don't know if they make a real difference</span></label>
+                        <label class="option"><input type="radio" name="campaignNecessary" value="probably-not"><span>Probably not — resources could be better spent elsewhere</span></label>
+                        <label class="option"><input type="radio" name="campaignNecessary" value="no"><span>No — I don't think these campaigns are needed</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        How effective do you think petitions (e.g., government e-petitions) are at influencing policy? <span class="required">*</span>
+                    </label>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="petitionEffectiveness" value="1" required><span class="likert-label">Not effective at all</span></label>
+                        <label class="likert-option"><input type="radio" name="petitionEffectiveness" value="2"><span class="likert-label">Slightly effective</span></label>
+                        <label class="likert-option"><input type="radio" name="petitionEffectiveness" value="3"><span class="likert-label">Moderately effective</span></label>
+                        <label class="likert-option"><input type="radio" name="petitionEffectiveness" value="4"><span class="likert-label">Very effective</span></label>
+                        <label class="likert-option"><input type="radio" name="petitionEffectiveness" value="5"><span class="likert-label">Extremely effective</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Which aspects of an animal protection campaign would make you MORE likely to get involved? <span class="required">*</span>
+                        <span class="question-sublabel">Select all that apply.</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="clear-evidence"><span>Clear evidence and facts (e.g., data on number of animals affected)</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="emotional-stories"><span>Emotional personal stories or images of the animals</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="easy-action"><span>Simple, low-effort actions I can take immediately (e.g., one-click petition)</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="celebrity-endorsement"><span>Endorsement by a public figure or celebrity</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="credible-org"><span>A credible, well-known organization leading the campaign</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="human-health-angle"><span>Connection to human health risks (e.g., zoonotic disease)</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="legal-angle"><span>Evidence of illegality or corruption (e.g., trafficking, falsified permits)</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="local-impact"><span>Knowing the issue directly affects my country or community</span></label>
+                        <label class="option"><input type="checkbox" name="campaignMotivators" value="progress-updates"><span>Seeing that the campaign is making measurable progress</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        What are the biggest reasons you might NOT engage with an animal protection campaign? <span class="required">*</span>
+                        <span class="question-sublabel">Select all that apply.</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="dont-know-enough"><span>I don't feel informed enough about the issue</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="wont-make-difference"><span>I doubt my individual action makes a difference</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="too-many-causes"><span>There are too many causes competing for my attention</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="too-emotional"><span>The content is too distressing or emotionally overwhelming</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="distrust-orgs"><span>I don't trust the organizations behind the campaigns</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="too-much-effort"><span>It requires too much time or effort to participate</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="dont-agree"><span>I don't personally agree with the goals of such campaigns</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="privacy-concern"><span>I'm concerned about sharing my personal information</span></label>
+                        <label class="option"><input type="checkbox" name="campaignBlockers" value="none"><span>None of the above — nothing stops me from engaging</span></label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ============ SECTION 5: OUTREACH & COMMUNICATION ============ -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>5 &middot; Outreach &amp; Communication</h2>
+                    <div class="description">How you prefer to learn about and interact with advocacy campaigns.</div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Through which channels would you prefer to learn about animal protection campaigns? <span class="required">*</span>
+                        <span class="question-sublabel">Select up to 3.</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="instagram"><span>Instagram</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="facebook"><span>Facebook</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="tiktok"><span>TikTok</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="twitter-x"><span>X (Twitter)</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="youtube"><span>YouTube</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="email-newsletter"><span>Email newsletters</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="news-media"><span>Traditional news media (TV, newspapers, online news)</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="podcasts"><span>Podcasts</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="reddit"><span>Reddit</span></label>
+                        <label class="option"><input type="checkbox" name="preferredChannels" value="word-of-mouth"><span>Word of mouth from people I trust</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        What type of campaign content resonates most with you? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="contentPreference" value="short-video" required><span>Short videos (under 2 min) with key facts</span></label>
+                        <label class="option"><input type="radio" name="contentPreference" value="documentary-style"><span>Longer documentary-style content</span></label>
+                        <label class="option"><input type="radio" name="contentPreference" value="infographic"><span>Infographics and data visualizations</span></label>
+                        <label class="option"><input type="radio" name="contentPreference" value="personal-stories"><span>Personal stories and testimonials</span></label>
+                        <label class="option"><input type="radio" name="contentPreference" value="detailed-article"><span>Well-researched written articles</span></label>
+                        <label class="option"><input type="radio" name="contentPreference" value="social-posts"><span>Shareable social media posts and memes</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        When a campaign asks you to take action, what format works best for you? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="actionPreference" value="sign-petition" required><span>Signing an online petition (one-click or minimal form)</span></label>
+                        <label class="option"><input type="radio" name="actionPreference" value="pre-written-email"><span>Sending a pre-written email to a government official</span></label>
+                        <label class="option"><input type="radio" name="actionPreference" value="social-share"><span>Sharing a post on social media</span></label>
+                        <label class="option"><input type="radio" name="actionPreference" value="donate"><span>Making a financial donation</span></label>
+                        <label class="option"><input type="radio" name="actionPreference" value="contact-mp"><span>Contacting my local elected representative directly</span></label>
+                        <label class="option"><input type="radio" name="actionPreference" value="volunteer"><span>Volunteering time to help with the campaign</span></label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        How likely are you to share an animal protection campaign with friends or family? <span class="required">*</span>
+                    </label>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="sharelikelihood" value="1" required><span class="likert-label">Very unlikely</span></label>
+                        <label class="likert-option"><input type="radio" name="sharelikelihood" value="2"><span class="likert-label">Unlikely</span></label>
+                        <label class="likert-option"><input type="radio" name="sharelikelihood" value="3"><span class="likert-label">Neutral</span></label>
+                        <label class="likert-option"><input type="radio" name="sharelikelihood" value="4"><span class="likert-label">Likely</span></label>
+                        <label class="likert-option"><input type="radio" name="sharelikelihood" value="5"><span class="likert-label">Very likely</span></label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ============ SECTION 6: OPEN-ENDED & FINAL THOUGHTS ============ -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>6 &middot; Your Thoughts</h2>
+                    <div class="description">A few final questions — your open and honest input is greatly valued.</div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        In your own words, what would make you more likely to support a campaign like the one to protect macaques?
+                        <span class="question-sublabel">Optional — but we'd love to hear your perspective.</span>
+                    </label>
+                    <textarea name="openWhatWouldHelp" class="text-area" placeholder="Share your thoughts..." rows="3"></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        What is the single biggest barrier preventing you (or people you know) from engaging with animal welfare causes?
+                        <span class="question-sublabel">Optional.</span>
+                    </label>
+                    <textarea name="openBiggestBarrier" class="text-area" placeholder="Share your thoughts..." rows="3"></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">
+                        Do you have any suggestions for how animal protection organizations could better communicate with the public?
+                        <span class="question-sublabel">Optional.</span>
+                    </label>
+                    <textarea name="openSuggestions" class="text-area" placeholder="Share your thoughts..." rows="3"></textarea>
+                </div>
+            </div>
+            
+            <!-- ============ PETITION CTA ============ -->
+            <div class="petition-cta">
+                <h3>Take Action: Sign the Federal Petition</h3>
+                <p>Petition e-7020, sponsored by MP Mel Arnold, calls on the Canadian Minister of the Environment to investigate the legality of macaque imports from Cambodia, add long-tailed macaques to Schedule II of the Wild Animal and Plant Trade Regulations, and suspend imports until a thorough review is completed. The petition closes on April 28, 2026.</p>
+                <a href="https://www.ourcommons.ca/petitions/en/Petition/Details?Petition=e-7020&fbclid=IwY2xjawPXMoNleHRuA2FlbQIxMABicmlkETFxUzZrcjVUT1VQY3RxSXlvc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHubbVIh63p1j9luFkQAPQWIHtjDCugP9XTT1wc3rTkvly1U9przqHZxjDlqi_aem_RpPu43wIOCdt4kj5_ERc7w" target="_blank" rel="noopener" class="petition-link">
+                    Sign Petition e-7020
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+            
+            <div class="section">
+                <div class="question">
+                    <label class="question-label">
+                        Did you (or will you) sign the petition linked above? <span class="required">*</span>
+                    </label>
+                    <div class="question-options">
+                        <label class="option"><input type="radio" name="petitionAction" value="signed-now" required><span>Yes, I just signed it</span></label>
+                        <label class="option"><input type="radio" name="petitionAction" value="will-sign"><span>Not yet, but I plan to</span></label>
+                        <label class="option"><input type="radio" name="petitionAction" value="already-signed"><span>I had already signed it before this survey</span></label>
+                        <label class="option"><input type="radio" name="petitionAction" value="not-eligible"><span>I'm not eligible (non-Canadian citizen/resident)</span></label>
+                        <label class="option"><input type="radio" name="petitionAction" value="prefer-not"><span>I prefer not to sign</span></label>
+                    </div>
+                </div>
+                
+                <div class="question" id="whyNotSignQuestion" style="display:none;">
+                    <label class="question-label">
+                        Could you share briefly why you chose not to sign?
+                        <span class="question-sublabel">Optional — helps us understand barriers to action.</span>
+                    </label>
+                    <textarea name="whyNotSign" class="text-area" placeholder="Your reason..." rows="2"></textarea>
+                </div>
+            </div>
+            
+            <!-- CONSENT -->
+            <div class="consent-box">
+                <label>
+                    <input type="checkbox" name="consent" required>
+                    <span>I confirm that I have read and understood the purpose of this survey, that my participation is voluntary, and I consent to my anonymized responses being used for research purposes. <span class="required">*</span></span>
+                </label>
+            </div>
+            
+            <div class="error-box" id="errorBox"></div>
+            
+            <div class="submit-section">
+                <button type="submit" class="submit-button" id="submitBtn">Submit Survey</button>
+                <div class="footer-note">
+                    Your responses are securely stored and confidential. Thank you for participating.
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        
+        const CONFIG = {
+            completionCode: 'CHCBVAKF',
+            googleSheetsUrl: 'https://script.google.com/macros/s/AKfycbwsEtt406s4xUL_LPm4faZjE7sFj0VC2Xt_eY9tNCsWggvCNo1xhCEIrusXUImCHw/exec',
+            backendUrl: 'https://yourdomain.com/api/submit',
+            submitMethod: 'googleSheets'
+        };
+        
+        // ==========================================
+        // PROLIFIC INTEGRATION
+        // ==========================================
+        
+        function captureUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            const prolificPID = urlParams.get('PROLIFIC_PID');
+            const studyID = urlParams.get('STUDY_ID');
+            const sessionID = urlParams.get('SESSION_ID');
+            
+            if (prolificPID) {
+                document.getElementById('prolificId').value = prolificPID;
+                document.getElementById('studyId').value = studyID || '';
+                document.getElementById('sessionId').value = sessionID || '';
+                document.getElementById('prolificInfo').style.display = 'block';
+            } else {
+                document.getElementById('prolificId').placeholder = 'Enter manually for testing';
+                document.getElementById('prolificId').readOnly = false;
+                document.getElementById('prolificId').classList.remove('readonly-field');
+            }
+        }
+        
+        // ==========================================
+        // PROGRESS BAR
+        // ==========================================
+        
+        function updateProgress() {
+            const form = document.getElementById('surveyForm');
+            const allRequired = form.querySelectorAll('[required]');
+            let filled = 0;
+            
+            allRequired.forEach(el => {
+                if (el.type === 'radio') {
+                    const name = el.name;
+                    if (form.querySelector(`input[name="${name}"]:checked`)) {
+                        filled++;
+                    }
+                } else if (el.type === 'checkbox') {
+                    if (el.checked) filled++;
+                } else if (el.value && el.value.trim() !== '') {
+                    filled++;
+                }
+            });
+            
+            // Deduplicate radio groups
+            const radioNames = new Set();
+            let radioTotal = 0;
+            let radioFilled = 0;
+            allRequired.forEach(el => {
+                if (el.type === 'radio' && !radioNames.has(el.name)) {
+                    radioNames.add(el.name);
+                    radioTotal++;
+                    if (form.querySelector(`input[name="${el.name}"]:checked`)) radioFilled++;
+                }
+            });
+            
+            let nonRadioTotal = 0;
+            let nonRadioFilled = 0;
+            allRequired.forEach(el => {
+                if (el.type !== 'radio') {
+                    nonRadioTotal++;
+                    if (el.type === 'checkbox') {
+                        if (el.checked) nonRadioFilled++;
+                    } else if (el.value && el.value.trim() !== '') {
+                        nonRadioFilled++;
+                    }
+                }
+            });
+            
+            const total = radioTotal + nonRadioTotal;
+            const done = radioFilled + nonRadioFilled;
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+            
+            document.getElementById('progressFill').style.width = pct + '%';
+        }
+        
+        document.getElementById('surveyForm').addEventListener('change', updateProgress);
+        document.getElementById('surveyForm').addEventListener('input', updateProgress);
+        
+        // ==========================================
+        // CONDITIONAL LOGIC
+        // ==========================================
+        
+        document.querySelectorAll('input[name="petitionAction"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const whyNot = document.getElementById('whyNotSignQuestion');
+                whyNot.style.display = this.value === 'prefer-not' ? 'block' : 'none';
+            });
+        });
+        
+        // ==========================================
+        // FORM SUBMISSION
+        // ==========================================
+        
+        document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validate checkbox groups
+            const motivators = document.querySelectorAll('input[name="campaignMotivators"]:checked');
+            if (motivators.length === 0) {
+                showError('Please select at least one factor that would motivate you to get involved (Section 4).');
+                return;
+            }
+            
+            const blockers = document.querySelectorAll('input[name="campaignBlockers"]:checked');
+            if (blockers.length === 0) {
+                showError('Please select at least one reason you might not engage with a campaign (Section 4).');
+                return;
+            }
+            
+            const channels = document.querySelectorAll('input[name="preferredChannels"]:checked');
+            if (channels.length === 0) {
+                showError('Please select at least one preferred communication channel (Section 5).');
+                return;
+            }
+            if (channels.length > 3) {
+                showError('Please select no more than 3 preferred communication channels (Section 5).');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting <span class="spinner"></span>';
+            
+            const formData = collectFormData();
+            formData.timestamp = new Date().toISOString();
+            
+            try {
+                if (CONFIG.submitMethod === 'googleSheets') {
+                    await submitToGoogleSheets(formData);
+                } else {
+                    await submitToBackend(formData);
+                }
+                
+                redirectToProlific();
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                showError('An error occurred. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+        
+        // ==========================================
+        // DATA COLLECTION
+        // ==========================================
+        
+        function collectFormData() {
+            const formData = {};
+            
+            const checkboxGroups = [
+                'campaignMotivators', 'campaignBlockers', 'preferredChannels'
+            ];
+            
+            checkboxGroups.forEach(group => {
+                formData[group] = [];
+            });
+            
+            const form = document.getElementById('surveyForm');
+            const formElements = form.elements;
+            
+            for (let element of formElements) {
+                if (element.name) {
+                    if (element.type === 'checkbox') {
+                        if (checkboxGroups.includes(element.name)) {
+                            if (element.checked) {
+                                formData[element.name].push(element.value);
+                            }
+                        } else {
+                            formData[element.name] = element.checked ? 'yes' : 'no';
+                        }
+                    } else if (element.type === 'radio') {
+                        if (element.checked) {
+                            formData[element.name] = element.value;
+                        }
+                    } else if (element.type !== 'submit') {
+                        formData[element.name] = element.value;
+                    }
+                }
+            }
+            
+            checkboxGroups.forEach(group => {
+                if (formData[group] && formData[group].length > 0) {
+                    formData[group] = formData[group].join(', ');
+                } else {
+                    formData[group] = '';
+                }
+            });
+            
+            return formData;
+        }
+        
+        // ==========================================
+        // SUBMISSION METHODS
+        // ==========================================
+        
+        async function submitToGoogleSheets(data) {
+            const response = await fetch(CONFIG.googleSheetsUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            return true;
+        }
+        
+        async function submitToBackend(data) {
+            const response = await fetch(CONFIG.backendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (!response.ok) {
+                throw new Error('Submission failed');
+            }
+            
+            return await response.json();
+        }
+        
+        function redirectToProlific() {
+            window.location.href = `https://app.prolific.com/submissions/complete?cc=${CONFIG.completionCode}`;
+        }
+        
+        // ==========================================
+        // ERROR HANDLING
+        // ==========================================
+        
+        function showError(message) {
+            const errorBox = document.getElementById('errorBox');
+            errorBox.textContent = message;
+            errorBox.style.display = 'block';
+            errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            setTimeout(() => {
+                errorBox.style.display = 'none';
+            }, 6000);
+        }
+        
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        
+        window.addEventListener('DOMContentLoaded', function() {
+            captureUrlParams();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>

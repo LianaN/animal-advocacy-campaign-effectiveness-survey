@@ -575,6 +575,33 @@
             transition: width 0.3s ease;
         }
         
+        .hero-image {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            max-height: 340px;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            object-position: center 30%;
+            display: block;
+        }
+        
+        .hero-image .photo-credit {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px 16px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            font-size: 11px;
+            color: rgba(255,255,255,0.75);
+            font-weight: 300;
+        }
+        
         @media (max-width: 600px) {
             body {
                 padding: 16px 12px;
@@ -632,6 +659,11 @@
             <h1>Animal Advocacy &amp; Campaign Effectiveness</h1>
             <p>This survey explores public awareness and attitudes toward animal protection campaigns in Canada — specifically efforts to protect endangered long-tailed macaques from laboratory research. Your honest responses will help us understand how to make advocacy more effective. All responses are confidential.</p>
 
+        </div>
+        
+        <div class="hero-image">
+            <img src="https://ml.globenewswire.com/Resource/Download/929daa40-91d0-4575-a4ae-3732f4f5f9c9?size=3" alt="Long-tailed macaques in transport crates being unloaded at Montreal-Mirabel airport on July 15, 2025 after transport from Cambodia">
+            <div class="photo-credit">Photo: Denis Germain / Animal Protection Party of Canada — Montreal-Mirabel airport, July 2025</div>
         </div>
         
         <form id="surveyForm">
